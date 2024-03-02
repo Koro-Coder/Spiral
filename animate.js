@@ -21,14 +21,16 @@ function calcX(z){
 }
 
 function calcY(z){
-  return Math.abs(Math.sqrt(z * z * Math.cos(z) * Math.cos(z) + (1000 * 1000) / z) *
-  Math.sin(angle + Math.atan(1000 / Math.sqrt(z) / (z * Math.cos(z)))));
+  y = Math.sqrt(z * z * Math.cos(z) * Math.cos(z) + (1000 * 1000) / z) *
+  Math.sin(angle + Math.atan(1000 / Math.sqrt(z) / (z * Math.cos(z))));
+  if(Math.floor(z/(Math.PI/2))%4==1 || Math.floor(z/(Math.PI/2))%4==2) y=-y;
+  return y;
 }
 
-x1 = calcX(beg);
+x1 = Math.abs(calcX(beg));
 y1 = calcY(beg);
 
-x2 = calcX(end);
+x2 = Math.abs(calcX(end));
 y2 = calcY(end);
 
 var speed = 0.01;
@@ -43,7 +45,7 @@ function animate() {
   c.fill();
   c.stroke();
 
-  for (let z = end + dz; z >= beg; z -= diff) {
+  for (let z = end - dz; z >= beg; z -= diff) {
     x = (innerWidth / (2 * x2)) * calcX(z) + innerWidth / 2;
     y = calcY(z);
     y = (innerHeight / (y1 - y2)) * (y - y2) + innerHeight/10;
