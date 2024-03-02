@@ -6,6 +6,11 @@ const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+window.addEventListener('resize', (event)=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
 const diff = 0.5;
 const beg = 6;
 const end = 105;
